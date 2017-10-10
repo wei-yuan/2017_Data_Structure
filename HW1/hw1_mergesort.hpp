@@ -16,15 +16,15 @@ template <typename T>
 void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: reference vector
 {
     //array dynamic allocation 
-    T *vec_ptr = new T[high - low + 1];
+    T *alloc_arr = new T[high - low + 1];
     
     //copy to dynamic allocated  array 
     for(int i=low; i<= high; i++)
-        vec_ptr[i-low] = rand_arr[i]; // i-low: make sure T[] start from zero        
+        alloc_arr[i-low] = rand_arr[i]; // i-low: make sure T[] start from zero        
     
     /*GDB*/
 /*    for(int i=low; i<= high; i++)
-        cout << "vec_ptr[" << i << "]: " << vec_ptr[i] << endl;
+        cout << "alloc_arr[" << i << "]: " << alloc_arr[i] << endl;
 */
     int i = low, j = mid + 1; // two pointer point two left & right array with number inside
 
@@ -32,19 +32,19 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
     {
         if(i > mid) //end of left array
         {
-            rand_arr[k] = vec_ptr[j-low]; j++;
+            rand_arr[k] = alloc_arr[j-low]; j++;
         }
         else if(j > high) //end of right array    
         {
-            rand_arr[k] = vec_ptr[i-low]; i++;
+            rand_arr[k] = alloc_arr[i-low]; i++;
         }            
-        else if(vec_ptr[i] < vec_ptr[j])
+        else if(alloc_arr[i] < alloc_arr[j])
         {
-            rand_arr[k] = vec_ptr[i-low]; i++;
+            rand_arr[k] = alloc_arr[i-low]; i++;
         }
         else
         {
-            rand_arr[k] = vec_ptr[j-low]; j++;
+            rand_arr[k] = alloc_arr[j-low]; j++;
         }            
     }
     /*GDB*/
@@ -54,7 +54,7 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
     }
 */
     //garbage collection for dynamic allocation
-    delete [] vec_ptr;
+    delete [] alloc_arr;
 }
 
 template <typename T>
