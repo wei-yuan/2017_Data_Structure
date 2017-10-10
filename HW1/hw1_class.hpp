@@ -50,9 +50,10 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
     for(int i=low; i<= high; i++)
         vec_ptr[i-low] = rand_arr[i]; // i-low: make sure T[] start from zero        
     
-    for(int i=low; i<= high; i++)
+    /*GDB*/
+/*    for(int i=low; i<= high; i++)
         cout << "vec_ptr[" << i << "]: " << vec_ptr[i] << endl;
-
+*/
     int i = low, j = mid + 1; // two pointer point two left & right array with number inside
 
     for(int k = low; k<= high; k++)
@@ -60,7 +61,7 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
         if(i > mid) //end of left array
         {
             rand_arr[k] = vec_ptr[j-low]; j++;
-        }            
+        }
         else if(j > high) //end of right array    
         {
             rand_arr[k] = vec_ptr[i-low]; i++;
@@ -74,22 +75,31 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
             rand_arr[k] = vec_ptr[j-low]; j++;
         }            
     }
-
-    for(int k = low; k<= high; k++)
+    /*GDB*/
+/*    for(int k = low; k<= high; k++)
     {
         cout << "rand_arr[" << k << "]: " << rand_arr[k] << endl;
     }
-
-    //garbage collection
+*/
+    //garbage collection for dynamic allocation
     delete [] vec_ptr;
 }
 
 template <typename T>
 void _mergesort(T rand_arr[], int low, int high)
 {
-    int mid = (low + high) / 2;
+    //recursion end condition: only one element left, left this stack
+    if (low == high) return;
+
+    int mid = (low + high) / 2;    
+
     _mergesort(rand_arr, low, mid);
     _mergesort(rand_arr, mid+1 , high);
+
+    //Do not use "if(rand_arr[low] > rand_arr[high])"
+    // -> it will be wrong when dealing with array with odd number positions
+    if(rand_arr[mid] > rand_arr[mid+1]) 
+        _merge(rand_arr, low, mid, high);
 }
 
 template <typename T>
