@@ -12,9 +12,14 @@ public:
     list();
     ~list();    
     //friend function
-    void merge(int arrayA[], int arrayB[])
+    friend class poly;
+    friend class spmatrix;
+
+    //common operation
+    int sum;
+    void merge(int num1, int num2)
     {
-        
+        sum = num1 + num2;
     }
 };
 
@@ -23,7 +28,10 @@ class poly
 public:
     poly();
     ~poly();
-    int add(int,int);
+    int add(int,int)
+    {
+        merge(int, int);
+    }
 };
 
 class spmatrix
