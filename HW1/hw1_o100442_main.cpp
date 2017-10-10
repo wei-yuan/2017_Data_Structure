@@ -10,7 +10,7 @@ int main()
     // using vector instead of array in C
     //int A[5] = {-1, 5, 3, 1, 7};
     //vector<int> vectorA(A + 1, A + 5); //vector start pos ~ end pos + 1
-    int tmpA[4] = {5, 3, 1, 7};
+    int tmpA[5] = {5, 3, 1, 7, 9};
 
     int length = sizeof(tmpA)/sizeof(*tmpA);
     cout << "length: " <<  length << endl;

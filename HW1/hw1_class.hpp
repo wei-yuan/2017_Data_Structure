@@ -46,8 +46,12 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
     //array dynamic allocation 
     T *vec_ptr = new T[high - low + 1];
     
-    for(int i=low; i< high; i++)
-        vec_ptr[i-low] = rand_arr[i]; // i-low: make sure T[] start from zero
+    //copy to dynamic allocated  array 
+    for(int i=low; i<= high; i++)
+        vec_ptr[i-low] = rand_arr[i]; // i-low: make sure T[] start from zero        
+    
+    for(int i=low; i<= high; i++)
+        cout << "vec_ptr[" << i << "]: " << vec_ptr[i] << endl;
 
     int i = low, j = mid + 1; // two pointer point two left & right array with number inside
 
@@ -70,6 +74,12 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
             rand_arr[k] = vec_ptr[j-low]; j++;
         }            
     }
+
+    for(int k = low; k<= high; k++)
+    {
+        cout << "rand_arr[" << k << "]: " << rand_arr[k] << endl;
+    }
+
     //garbage collection
     delete [] vec_ptr;
 }
@@ -100,7 +110,7 @@ void mergesort_bottom_up(T rand_arr[], int num_element)
         {
             cout << "i: " << i << endl;            
             if( rand_arr[ i + size - 1 ] > rand_arr[ i + size ] )
-            _merge(rand_arr, i, i+size-1, min( i+size*2-1, num_element-1) ); //arr, low, mid, high
+                _merge(rand_arr, i, i+size-1, min( i+size*2-1, num_element-1) ); //arr, low, mid, high
         }
     }
 }
