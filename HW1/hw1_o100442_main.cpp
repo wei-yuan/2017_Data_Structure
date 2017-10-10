@@ -21,12 +21,5 @@ int main()
     for(int i=0; i< length; i++)
         cout << "tmpA[" << i << "]: " << tmpA[i] << endl;
     
- /*   int tmpB[4] = {8, 6, 2, 4};
-    mergesort(tmpA, length);
-
-    cout << "After sorted" << endl;
-    for(int i=0; i< length; i++)
-        cout << "tmpB[" << i << "]: " << tmpB[i] << endl;    
-*/
     return 0;
 }
