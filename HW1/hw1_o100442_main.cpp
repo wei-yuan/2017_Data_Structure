@@ -1,5 +1,6 @@
 # include <iostream>
 # include <vector> 
+# include <array>
 # include "hw1_class.hpp"
 # include "hw1_mergesort.hpp"
 
@@ -15,15 +16,16 @@ int main()
     int tmpB[5] = {8, 2, 6, 4, 10};
 
     int size_of_array = sizeof(tmpA)/sizeof(*tmpA);
+    
     cout << "Array size: " <<  size_of_array << endl;
-
     cout << "Before sorted" << endl;
+
     for(int i=0; i< size_of_array; i++)
     {        
         cout << "tmpA[" << i << "]: " << tmpA[i] << ", tmpB[" << i << "]: " << tmpB[i] << endl;        
     }
     
-    //mergesort            
+    //mergesort, how about execution time
     mergesort_bottom_up(tmpA, size_of_array);
     mergesort_top_down(tmpB, size_of_array);
     
@@ -35,7 +37,12 @@ int main()
     {                
         cout << "tmpA[" << i << "]: " << tmpA[i] << ", tmpB[" << i << "]: " << tmpB[i] << endl;        
     }
-        
+
+    // place an array into list class
+    cout << "#---Class---#" << endl;
+    
+    list list1(5);
+    list1.Print();    
     
     return 0;
 }

@@ -2,27 +2,48 @@
 # define HW1_CLASS_HPP
 
 # include <iostream>
+# include <array>
 
 using namespace std;
 
 // You can try reference and compare to other method
 class list
 {
-public:
-    //constructor & destructor
-    list();
-    ~list();    
-    //friend function
+    //friend function or class
     friend class poly;
     friend class spmatrix;
+    int *_list_array;        
+
+public:
+    //constructor & destructor
+    list(int len);
+    ~list();        
+    
+    int length;
+
+    // function
+    void Print()
+    {
+        cout << "length =" << length << endl;
+    }
 
     //common operation
-    int sum;
     int merge(int num1, int num2)
     {
         return num1 + num2;
     }
 };
+// constructor
+list::list(int len)
+{
+    //cout << "Object is being created, length = " << len << endl;
+    length = len;
+    _list_array = new int[length];
+}
+list::~list() 
+{
+    delete [] _list_array;
+}
 
 class poly
 {
@@ -33,8 +54,8 @@ public:
     //void expand();
     int add(int num1, int num2); //friend function
 
-    template <typename T>
-    int check(T arrayA_term[], T arrayB_term[], int len_array, 
+/*    template <typename T>
+    void check(T arrayA_term[], T arrayB_term[], int len_array, 
                 T arrayA_coef[], T arrayB_coef[]) 
     {
         //array dynamic allocation 
@@ -66,6 +87,7 @@ public:
             }
         }
     }    
+*/    
 };
 
 class spmatrix
