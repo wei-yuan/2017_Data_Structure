@@ -5,7 +5,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/alex/2017_Data_Structure/HW1/main",
+            "program": "${workspaceRoot}/HW1/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}/HW1",
