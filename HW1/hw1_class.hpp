@@ -2,57 +2,54 @@
 # define HW1_CLASS_HPP
 
 # include <iostream>
-# include <array>
+# include <vector>
 
 using namespace std;
 
 // You can try reference and compare to other method
-class list
+class List
 {
-    //friend function or class
-    friend class poly;
-    friend class spmatrix;
-    int *_list_array;        
+    //friend function or class    
+    std::vector<int> _list_array;
 
 public:
+    List() { _list_array.resize(10); }
+
     //constructor & destructor
-    list(int len);
-    ~list();        
-    
-    int length;
+    List(int len)
+    {
+        //cout << "Object is being created, length = " << len << endl;
+        _list_array.resize(len);
+    }
 
     // function
-    void Print()
+    void print()
     {
-        cout << "length =" << length << endl;
+        cout << "length =" << _list_array.size() << endl;
     }
 
     //common operation
     int merge(int num1, int num2)
     {
+        cout << "num1 + num2 =" << num1 + num2 << endl;
         return num1 + num2;
     }
 };
-// constructor
-list::list(int len)
-{
-    //cout << "Object is being created, length = " << len << endl;
-    length = len;
-    _list_array = new int[length];
-}
-list::~list() 
-{
-    delete [] _list_array;
-}
 
-class poly
+class Poly
 {
+    List list;
+
 public:
-    poly();
-    ~poly();
+    Poly();
+    ~Poly();
     // Either array A or B will expand to same size dynamically
     //void expand();
-    int add(int num1, int num2); //friend function
+    int add(int num1, int num2) //friend function
+    {
+        return list.merge(num1, num2);
+    }
+    
 
 /*    template <typename T>
     void check(T arrayA_term[], T arrayB_term[], int len_array, 
@@ -90,11 +87,4 @@ public:
 */    
 };
 
-class spmatrix
-{
-public:
-    spmatrix();
-    ~spmatrix();
-    int mul(int,int);
-};
 # endif

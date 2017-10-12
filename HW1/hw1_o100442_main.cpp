@@ -1,3 +1,7 @@
+/*
+    C++11 recommended
+*/
+
 # include <iostream>
 # include <vector> 
 # include <array>
@@ -41,8 +45,11 @@ int main()
     // place an array into list class
     cout << "#---Class---#" << endl;
     
-    list list1(5);
-    list1.Print();    
-    
+/*    list list1(5);
+    list1.Print();
+    int testmerge = list1.Merge(1,2);
+    cout <<"testmerge= " << testmerge << endl;
+*/    
+
     return 0;
 }
