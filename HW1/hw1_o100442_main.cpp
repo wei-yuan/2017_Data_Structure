@@ -13,8 +13,8 @@ using namespace std;
 int main()
 {
     // using vector instead of array in C
-    int A[5] = {5, 3, 1, 7, 9};
-    int B[5] = {8, 2, 6, 4, 10};
+    int A[5] = {5, 3, 1, 9, 7};
+    int B[5] = {8, 2, 10, 6, 4};
     vector<int> vectorA(A + 0, A + 5); //vector start pos ~ end pos + 1
     vector<int> vectorB(B + 0, B + 5);
 
@@ -30,7 +30,7 @@ int main()
     
     //mergesort, how about execution time
     mergesort_bottom_up(vectorA, size_of_array);
-    //mergesort_top_down(vectorB, size_of_array);
+    mergesort_top_down(vectorB, size_of_array);
     
     cout << "After sorted" << endl;
     cout << "A in Bottom up fashion" << endl;
