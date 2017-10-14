@@ -9,10 +9,10 @@
             "taskName": "Compile", // 任务名称，与launch.json的preLaunchTask相对应
             "command": "g++", // 如果用MinGW，编译C用gcc，编译c++用g++
             "args": [
+                "-g", // 生成和 debug 有关的信息
                 "${workspaceRoot}/hw1_o100442_main.cpp",
                 "-o", // 指定输出文件名，不加该参数则默认输出a.exe
-                "${workspaceRoot}/main", 
-                "-g", // 生成和 debug 有关的信息
+                "${workspaceRoot}/main",                 
                 "-Wall", // 开启额外警告
                 //"-static-libgcc", // 静态链接
                 //"-fcolor-diagnostics",

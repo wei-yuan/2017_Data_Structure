@@ -6,25 +6,33 @@
 
 //add "using namespace std; wheb there is only one namespace in this header file" 
 
+//template <typename T>
 // Reference object and inheritance a class, avoid friend
 class List
 {
-    // allow 2D vector 
-    std::vector<int> _list_array;
+    //private data member, allow 2-Dimensional data of vector 
+    std::vector<int> _list_1d_array;
+    std::vector< std::vector<int> > _list_2d_array;
 
-public:
-    List() { _list_array.resize(10); }
-
+public:    
     //constructor & destructor
-    List(int len)
+    List() { _list_1d_array.resize(1); }
+    List(std::vector<int> & input_1d_array)
     {
-        _list_array.resize(len);
+        _list_1d_array = input_1d_array;
+    }
+    List(std::vector< std::vector<int> > & input_2d_array)
+    {
+        _list_2d_array = input_2d_array;
     }
 
     // function
-    void print()
+    void print_poly(std::vector< std::vector<int> > & input_2d_array)
     {
-        std::cout << "length =" << _list_array.size() << std::endl;
+        //size_t row, col;
+        for(size_t row = 0; row < input_2d_array.size(); row++)
+            for(size_t col = 0; col < input_2d_array[row].size(); col++)
+                std::cout << "list_2d_array[" << row << "][" << col << "]: " << input_2d_array[row][col] <<  std::endl;
     }
 
     //common operation, merge two list
@@ -35,26 +43,18 @@ public:
     }
 };
 
-class Poly
+class Poly : public List
 {
-    List list;
+    //private data member, allow 2-Dimensional data of vector 
+    std::vector<int> _poly_1d_array;
+    std::vector< std::vector<int> > _poly_2d_array;
 
 public:
-    Poly();
-    ~Poly();
-    // Either array A or B will expand to same size dynamically
-    //void expand();
-    int add(int num1, int num2) //friend function
+    Poly(std::vector< std::vector<int> > & input_2d_array)
     {
-        return list.merge(num1, num2);
+        _poly_2d_array = input_2d_array;
     }
 
-/*  template <typename T>
-    void check() 
-    {
-
-    }    
-*/    
 };
 
 # endif

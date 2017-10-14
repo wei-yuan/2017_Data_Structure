@@ -62,10 +62,10 @@ void mergesort_bottom_up(std::vector<T> & rand_arr, int num_element)
         }
         
         /*GDB*/
-        for(int k = 0; k < 5; k++)
+        /*for(int k = 0; k < 5; k++)
         {
             std::cout << "rand_arr[" << k << "]: " << rand_arr[k] << std::endl;
-        }
+        }*/
     }
 }
 
