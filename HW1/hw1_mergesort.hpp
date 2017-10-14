@@ -4,8 +4,6 @@
 # include <iostream>
 # include <vector> 
 
-using namespace std;
-
 // Sorting array with random number inside
 // Odd & Even number of array size should be considered
 // try iterator instead of recursive way
@@ -13,14 +11,13 @@ using namespace std;
 
 template <typename T>
 // combime array[low, mid-1], array[mid, high]
-void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: reference vector
+void _merge(std::vector<T> rand_arr, int low, int mid, int high)  //vector<T> & rand_vecl: reference vector
 {
-    //array dynamic allocation 
-    T *alloc_arr = new T[high - low + 1];
+    std::vector<T> _alloc_arr;
     
-    //copy to dynamic allocated  array 
+    //copy to vector
     for(int i=low; i<= high; i++)
-        alloc_arr[i-low] = rand_arr[i]; // i-low: make sure T[] start from zero        
+        _alloc_arr[i-low] = rand_arr[i]; // i-low: make sure vector index start from zero        
     
     /*GDB*/
 /*    for(int i=low; i<= high; i++)
@@ -32,19 +29,19 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
     {
         if(i > mid) //end of left array
         {
-            rand_arr[k] = alloc_arr[j-low]; j++;
+            rand_arr[k] = _alloc_arr[j-low]; j++;
         }
         else if(j > high) //end of right array    
         {
-            rand_arr[k] = alloc_arr[i-low]; i++;
+            rand_arr[k] = _alloc_arr[i-low]; i++;
         }            
-        else if(alloc_arr[i] < alloc_arr[j])
+        else if(_alloc_arr[i] < _alloc_arr[j])
         {
-            rand_arr[k] = alloc_arr[i-low]; i++;
+            rand_arr[k] = _alloc_arr[i-low]; i++;
         }
         else
         {
-            rand_arr[k] = alloc_arr[j-low]; j++;
+            rand_arr[k] = _alloc_arr[j-low]; j++;
         }            
     }
     /*GDB*/
@@ -53,12 +50,10 @@ void _merge(T rand_arr[], int low, int mid, int high)  //vector<T> & rand_vecl: 
         cout << "rand_arr[" << k << "]: " << rand_arr[k] << endl;
     }
 */
-    //garbage collection for dynamic allocation
-    delete [] alloc_arr;
 }
 
 template <typename T>
-void _mergesort_divide(T rand_arr[], int low, int high)
+void _mergesort_divide(std::vector<T> rand_arr, int low, int high)
 {
     //recursion end condition: only one element left, left this stack
     if (low == high) return;
@@ -75,13 +70,13 @@ void _mergesort_divide(T rand_arr[], int low, int high)
 }
 
 template <typename T>
-void mergesort_top_down(T rand_arr[], int num_element)
+void mergesort_top_down(std::vector<T> rand_arr, int num_element)
 {
     _mergesort_divide(rand_arr, 0, num_element-1);
 }
 
 template <typename T>
-void mergesort_bottom_up(T rand_arr[], int num_element)
+void mergesort_bottom_up(std::vector<T> rand_arr, int num_element)
 {   
     // interval size control
     for(int size = 1; size < num_element; size *= 2)
@@ -94,7 +89,7 @@ void mergesort_bottom_up(T rand_arr[], int num_element)
             /*GDB*/ 
             //cout << "i: " << i << endl;            
             if( rand_arr[ i + size - 1 ] > rand_arr[ i + size ] )
-                _merge(rand_arr, i, i+size-1, min( i+size*2-1, num_element-1) ); //arr, low, mid, high
+                _merge(rand_arr, i, i+size-1, std::min( i+size*2-1, num_element-1) ); //arr, low, mid, high
         }
     }
 }

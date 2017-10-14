@@ -5,10 +5,10 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/HW1/main",
+            "program": "${workspaceRoot}/main",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceRoot}/HW1",
+            "cwd": "${workspaceRoot}",
             "environment": [],
             "externalConsole": true,
             "linux": {

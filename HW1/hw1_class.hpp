@@ -4,12 +4,12 @@
 # include <iostream>
 # include <vector>
 
-using namespace std;
+//add "using namespace std; wheb there is only one namespace in this header file" 
 
-// You can try reference and compare to other method
+// Reference object and inheritance a class, avoid friend
 class List
 {
-    //friend function or class    
+    // allow 2D vector 
     std::vector<int> _list_array;
 
 public:
@@ -18,20 +18,19 @@ public:
     //constructor & destructor
     List(int len)
     {
-        //cout << "Object is being created, length = " << len << endl;
         _list_array.resize(len);
     }
 
     // function
     void print()
     {
-        cout << "length =" << _list_array.size() << endl;
+        std::cout << "length =" << _list_array.size() << std::endl;
     }
 
-    //common operation
+    //common operation, merge two list
     int merge(int num1, int num2)
     {
-        cout << "num1 + num2 =" << num1 + num2 << endl;
+        std::cout << "num1 + num2 =" << num1 + num2 << std::endl;
         return num1 + num2;
     }
 };
@@ -49,40 +48,11 @@ public:
     {
         return list.merge(num1, num2);
     }
-    
 
-/*    template <typename T>
-    void check(T arrayA_term[], T arrayB_term[], int len_array, 
-                T arrayA_coef[], T arrayB_coef[]) 
+/*  template <typename T>
+    void check() 
     {
-        //array dynamic allocation 
-        T *coef_arr = new T[len_array];
-        T *term_arr = new T[len_array];
 
-        //inde pointer initialization
-        int idxA, idxB;
-        idxA = idxB = 0; //when should I initialization of this?
-
-        for(int i=0; i < len_array; i++)
-        {
-            if(arrayA_term[idxA] == arrayB_term[idxB]){
-                term_arr[i] = arrayA_coef[idxA];    //change to friend add()
-                coef_arr[i] = arrayA_coef[idxA] + arrayB_coef[idxB];  //change to friend add()
-                idxA++; idxB++;
-            }                
-            else if( arrayA_term[idxA] > arrayB_term[idxB])
-            {
-                term_arr[i] = arrayB_term[idxB];  //change to friend add()
-                coef_arr[i] = arrayB_coef[idxB];  //change to friend add()                
-                idxB++;
-            }
-            else
-            {
-                term_arr[i] = arrayA_term[idxA];  //change to friend add()
-                coef_arr[i] = arrayA_coef[idxA];  //change to friend add()                
-                idxA++;
-            }
-        }
     }    
 */    
 };
