@@ -11,49 +11,80 @@
 class List
 {
     //private data member, allow 2-Dimensional data of vector 
-    std::vector<int> _list_1d_array;
-    std::vector< std::vector<int> > _list_2d_array;
+    //protected ???
+    std::vector<int> _1d_array;
+
+protected:
+    std::vector< std::vector<int> > _2d_array;
 
 public:    
     //constructor & destructor
-    List() { _list_1d_array.resize(1); }
+    List()
+    {
+        _1d_array.resize(1);
+    }
     List(std::vector<int> & input_1d_array)
     {
-        _list_1d_array = input_1d_array;
+        _1d_array = input_1d_array;
     }
     List(std::vector< std::vector<int> > & input_2d_array)
     {
-        _list_2d_array = input_2d_array;
+        _2d_array = input_2d_array;
     }
 
     // function
-    void print_poly(std::vector< std::vector<int> > & input_2d_array)
+    // Should I use protected instead of use input argument???
+    void print_poly()
     {
         //size_t row, col;
-        for(size_t row = 0; row < input_2d_array.size(); row++)
-            for(size_t col = 0; col < input_2d_array[row].size(); col++)
-                std::cout << "list_2d_array[" << row << "][" << col << "]: " << input_2d_array[row][col] <<  std::endl;
+        for(size_t row = 0; row < _2d_array.size(); row++)
+            for(size_t col = 0; col < _2d_array[row].size(); col++)
+                std::cout << "list_2d_array[" << row << "][" << col << "]: " << _2d_array[row][col] <<  std::endl;
     }
 
     //common operation, merge two list
-    int merge(int num1, int num2)
+    void merge()
     {
-        std::cout << "num1 + num2 =" << num1 + num2 << std::endl;
-        return num1 + num2;
+              
     }
 };
 
-class Poly : public List
-{
-    //private data member, allow 2-Dimensional data of vector 
-    std::vector<int> _poly_1d_array;
-    std::vector< std::vector<int> > _poly_2d_array;
-
+class Poly : public List //inheritance of class List
+{    
 public:
+    //constructor & destructor
     Poly(std::vector< std::vector<int> > & input_2d_array)
     {
-        _poly_2d_array = input_2d_array;
+        _2d_array = input_2d_array;
+    }    
+    //use merge() in class List to merge two poly object
+    void add(std::vector< std::vector<int> > & input_2d_array)
+    {
+        int input_size = input_2d_array.size();
+        int self_size = _2d_array.size();
+
+        for(int i=0; i < std::max(input_size, self_size); i++)
+        {
+            if( input_2d_array[0][i] == _2d_array[0][i] )
+            {
+                //same, merge
+            }                
+            else if ( input_2d_array[0][i] > _2d_array[0][i] )
+            {
+                //same, merge
+            }
+            else
+            {
+               //same, merge 
+            }
+
+        }            
+
     }
+};
+
+class spmatrix : public List
+{
 
 };
 

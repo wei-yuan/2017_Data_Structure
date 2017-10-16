@@ -23,16 +23,25 @@ int main()
     int C_term[2] = {1,0}; // term[]
     int C_coef[2] = {1,1}; // coef[]
 
+    // 2-D vector
+    int D_term[2] = {1,1}; // term[]
+    int D_coef[2] = {2,5}; // coef[]
+
     std::vector<int> vectorC1(C_term + 0, C_term + 2);
     std::vector<int> vectorC2(C_coef + 0, C_coef + 2);    
     std::vector< std::vector<int> > vectorC;
     vectorC.push_back(vectorC1);
     vectorC.push_back(vectorC2);
 
-    int size_of_array = vectorA.size();
+    std::vector<int> vectorD1(D_term + 0, D_term + 2);
+    std::vector<int> vectorD2(D_coef + 0, D_coef + 2);    
+    std::vector< std::vector<int> > vectorD;
+    vectorD.push_back(vectorD1);
+    vectorD.push_back(vectorD2);
     
-    std::cout << "Vector size: " <<  size_of_array << std::endl;
     std::cout << "Before sorted" << std::endl;
+
+    int size_of_array = vectorA.size();
 
     for(int i=0; i< size_of_array; i++)
     {        
@@ -41,7 +50,11 @@ int main()
 
     for(size_t row=0; row < vectorC.size(); row++)
         for(size_t col=0; col < vectorC[row].size(); col++)
-        std::cout << "vectorC[" << row << "][" << col << "]: " << vectorC[row][col] <<  std::endl;
+            std::cout << "vectorC[" << row << "][" << col << "]: " << vectorC[row][col] <<  std::endl;
+    
+    for(size_t row=0; row < vectorD.size(); row++)
+        for(size_t col=0; col < vectorD[row].size(); col++)
+                std::cout << "vectorD[" << row << "][" << col << "]: " << vectorD[row][col] <<  std::endl;
     
     
     //mergesort, how about execution time
@@ -59,12 +72,16 @@ int main()
 
     // place an array into list class
     std::cout << "#---Class---#" << std::endl;
+   
     std::cout << "#---List---#" << std::endl;
     List list1(vectorC);
-    list1.print_poly(vectorC);
+    list1.print_poly();
+    
     std::cout << "#---Poly---#" << std::endl;
-    Poly poly1(vectorC);
-    poly1.print_poly(vectorC);
+    Poly poly1(vectorD);
+    poly1.print_poly();
+
+    
 
     return 0;
 }
