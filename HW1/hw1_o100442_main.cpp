@@ -1,44 +1,23 @@
 /*
     C++11 recommended
 */
-
 # include <iostream>
 # include <vector> 
 # include "hw1_class.hpp"
 # include "hw1_mergesort.hpp"
 
-//using namespace std;
-
-
 int main()
 {
     // using vector instead of array in C++
     // 1-D vector
-    int A[5] = {5, 3, 1, 9, 7};
-    int B[5] = {8, 2, 10, 6, 4};        
-    
-    std::vector<int> vectorA(A + 0, A + 5); //vector start pos ~ end pos + 1
-    std::vector<int> vectorB(B + 0, B + 5);
-    // 2-D vector
-    int C_term[2] = {1,0}; // term[]
-    int C_coef[2] = {1,1}; // coef[]
-
-    // 2-D vector
-    int D_term[2] = {1,1}; // term[]
-    int D_coef[2] = {2,5}; // coef[]
-
-    std::vector<int> vectorC1(C_term + 0, C_term + 2);
-    std::vector<int> vectorC2(C_coef + 0, C_coef + 2);    
-    std::vector< std::vector<int> > vectorC;
-    vectorC.push_back(vectorC1);
-    vectorC.push_back(vectorC2);
-
-    std::vector<int> vectorD1(D_term + 0, D_term + 2);
-    std::vector<int> vectorD2(D_coef + 0, D_coef + 2);    
-    std::vector< std::vector<int> > vectorD;
-    vectorD.push_back(vectorD1);
-    vectorD.push_back(vectorD2);
-    
+    std::vector<int> vectorA = {5, 3, 1, 9, 7}; //vector start pos ~ end pos + 1
+    std::vector<int> vectorB = {8, 2, 10, 6, 4};
+    // 2-D vector    
+    std::vector< std::vector<int>> vectorC = {{1,0}, {2,5}};
+    std::vector< std::vector<int>> vectorD = {{1,1}, {2,5}};
+    std::vector< std::vector<int>> vectorE = {{1,3}, {1,3}, {2,2}};
+    std::vector< std::vector<int>> vectorF = {{1,2}, {2,1}, {2,2}};
+        
     std::cout << "Before sorted" << std::endl;
 
     int size_of_array = vectorA.size();
@@ -75,14 +54,18 @@ int main()
    
     std::cout << "#---List---#" << std::endl;
     List list1(vectorC);
-    list1.print_poly();
+    list1.print_array();
     
     std::cout << "#---Poly---#" << std::endl;
     Poly poly1(vectorD);
-    poly1.print_poly();
+    poly1.print_array();
     std::cout << "#---Add()---#" << std::endl;
     poly1.add(vectorD);
-    poly1.print_poly();
+    poly1.print_array();
+    std::cout << "#---spmatrix---#" << std::endl;
+    Spmatrix spmatrix1(vectorE);
+    spmatrix1.mul(vectorF);
+    spmatrix1.print_array();
 
     return 0;
 }

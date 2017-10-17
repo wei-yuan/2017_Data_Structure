@@ -30,7 +30,7 @@ public:
     }
 
     // function
-    void print_poly()
+    void print_array()
     {
         //size_t row, col;
         for(size_t row = 0; row < _2d_array.size(); row++)
@@ -56,7 +56,6 @@ public:
         _2d_array = input_2d_array;
     }    
     // use merge() in class List to merge two poly object
-    // input list class vector ?
     void add(std::vector< std::vector<int> > & input_2d_array)
     {
         std::vector< std::vector<int> > tmp_vec; // size is zero, so it needs init before use it 
@@ -125,14 +124,45 @@ public:
     }
 };
 
-class spmatrix : public List
-{
+class Spmatrix : public List
+{    
 public:
-    void mul(){
-        //C = A * B
-        //transpose B
-        //element wise multiplication
-        //merge operation
+    // constructor & destructor
+    Spmatrix(std::vector< std::vector<int> > & input_2d_array)
+    {
+        _2d_array = input_2d_array;
+    }
+    void mul(std::vector< std::vector<int> > & input_2d_array){
+        // C = A * B, transpose B for convenience
+        // It only needs to change the idx of reading input_2d_array 
+        // from row to col vector
+        std::vector<int> tmp_vec(1, 0); // init
+
+        int input_size = input_2d_array.size();
+        int _2d_arr_size = _2d_array.size();        
+                
+        for(int i=0; i < _2d_arr_size; i++)
+        {
+            for(int j=0; j < input_size; j++)
+            {
+                // element wise multiplication
+                // transpose here: change 0 -> 1
+                //merge operation
+                if(input_2d_array[1][i] == _2d_array[0][j]) 
+                {
+                    tmp_vec[0]  = input_2d_array[2][i] * _2d_array[2][j];
+                    // val1 * val2 - > val1 add val2 times
+                    for(int k=0; k< tmp_vec[0]; k++)
+                    {
+                        merge(input_2d_array,_2d_array, 2, i, j);
+                    }
+                }
+                else
+                {
+                    //zero, do nothing
+                }             
+            }
+        }        
     }
 };
 
