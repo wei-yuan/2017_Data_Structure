@@ -6,7 +6,6 @@
 
 //add "using namespace std; wheb there is only one namespace in this header file" 
 
-//template <typename T>
 // Reference object and inheritance a class, avoid friend
 class List
 {
@@ -31,7 +30,6 @@ public:
     }
 
     // function
-    // Should I use protected instead of use input argument???
     void print_poly()
     {
         //size_t row, col;
@@ -39,12 +37,11 @@ public:
             for(size_t col = 0; col < _2d_array[row].size(); col++)
                 std::cout << "list_2d_array[" << row << "][" << col << "]: " << _2d_array[row][col] <<  std::endl;
     }    
-    //common operation, merge two list
-    void merge(std::vector< std::vector<int> > & input_2d_array_1, int row, int idx)
+    //common operation, compare two element
+    void merge()
     {
-        _2d_array[row][idx] += input_2d_array_1[row][idx];
-    }
-    //TODO compare(), enum?
+        
+    }    
 };
 
 class Poly : public List //inheritance of class List
@@ -52,66 +49,93 @@ class Poly : public List //inheritance of class List
 protected:
     int row = 1;     
 public:    
-    //constructor & destructor
+    // constructor & destructor
     Poly(std::vector< std::vector<int> > & input_2d_array)
     {
         _2d_array = input_2d_array;
     }    
-    //use merge() in class List to merge two poly object
+    // use merge() in class List to merge two poly object
     // input list class vector ?
     void add(std::vector< std::vector<int> > & input_2d_array)
     {
-        std::vector< std::vector<int> > tmp_array;
+        std::vector< std::vector<int> > tmp_vec;
         int input_size = input_2d_array.size();
-        int self_size = _2d_array.size();
-        int idx_input, idx_self;
-        idx_input = idx_self = 0;
-
-        std::vector< std::vector<int> >::iterator row_Iter; //between rows
-        std::vector<int> ::iterator col_Iter; //between col in same row
+        int _2d_arr_size = _2d_array.size();
+        int idx_input, idx_2d_arr, idx_tmp;
+        idx_input = idx_2d_arr = idx_tmp = 0;
         
-        for(int i=0; i < std::max(input_size, self_size); i++)
+                
+        for(int i=0; i < std::min(input_size, _2d_arr_size); i++)
         {
-            if( input_2d_array[0][idx_input] == _2d_array[0][idx_self] )
+            if( input_2d_array[0][idx_input] == _2d_array[0][idx_2d_arr] )
             {
-                //term: same, merge
-                merge(input_2d_array, row, idx_input);
+                //term: same, merge                
                 for(int j=0; j < row; j++)
                 {
-                    tmp[j][idx_input] = input_2d_array[j][idx_input];
-                }
+                    tmp_vec[0][idx_tmp] = _2d_array[0][idx_2d_arr];
+                }                
+                merge();
                 // increment index value
-                idx_input++; idx_self++;
+                idx_input++; 
+                idx_2d_arr++;
+                idx_tmp++;
             }                
-            else if ( input_2d_array[0][idx_input] > _2d_array[0][idx_self] ) 
+            else if (input_2d_array[0][idx_input] > _2d_array[0][idx_2d_arr]  ) 
             {
-                // term: input array > self
-                // only increment self
-                idx_self++;
+                // term: input array > self                
+                for(int j=0; j < row; j++)
+                {
+                    tmp_vec[j][idx_tmp] = _2d_array[j][idx_2d_arr];
+                }
+                idx_2d_arr++;
             }
             else
             {
                 // term: input array < self
-                // insert into self vector
-                /* TODO: use insert() of vector
-                for(row_Iter = _2d_array.begin(); row_Iter != _2d_array.end(); row++)
-                {
-                    //_2d_array.insert(row, );
-                }*/
+                // insert
                 for(int j=0; j < row; j++)
                 {
-                    tmp[j][idx_input] = input_2d_array[j][idx_input];
+                    tmp_vec[j][idx_tmp] = input_2d_array[j][idx_input];
                 }
                 // increment 
                 idx_input++;
+            }            
+        }// end for
+
+        if (input_size > _2d_arr_size) // self empty first
+        {
+            for(int i=idx_input; i < input_size; i++ )    
+            {
+                for(int j=0; j < row; j++)
+                {
+                    tmp_vec[j][i] = input_2d_array[j][i];
+                }
             }
-        }            
+        }
+        else // input empty first
+        {
+            for(int i=idx_2d_arr; i < _2d_arr_size; i++ )    
+            {
+                for(int j=0; j < row; j++)
+                {
+                    tmp_vec[j][i] = _2d_array[j][i];
+                }
+            }
+        }           
+        // copy back to vector _2d_array
+        _2d_array = tmp_vec;
     }
 };
 
 class spmatrix : public List
 {
-
+public:
+    void mul(){
+        //C = A * B
+        //transpose B
+        //element wise multiplication
+        //merge operation
+    }
 };
 
 # endif
