@@ -38,9 +38,10 @@ public:
                 std::cout << "list_2d_array[" << row << "][" << col << "]: " << _2d_array[row][col] <<  std::endl;
     }    
     //common operation, compare two element
-    void merge()
+    int merge(std::vector< std::vector<int> > & input_2d_array_1,
+        std::vector< std::vector<int> > & input_2d_array_2, int row, int col_1, int col_2)
     {
-        
+        return input_2d_array_1[row][col_1] += input_2d_array_2[row][col_2];
     }    
 };
 
@@ -58,23 +59,20 @@ public:
     // input list class vector ?
     void add(std::vector< std::vector<int> > & input_2d_array)
     {
-        std::vector< std::vector<int> > tmp_vec;
+        std::vector< std::vector<int> > tmp_vec; // size is zero, so it needs init before use it 
+        tmp_vec = input_2d_array;
+
         int input_size = input_2d_array.size();
         int _2d_arr_size = _2d_array.size();
         int idx_input, idx_2d_arr, idx_tmp;
         idx_input = idx_2d_arr = idx_tmp = 0;
-        
                 
         for(int i=0; i < std::min(input_size, _2d_arr_size); i++)
         {
             if( input_2d_array[0][idx_input] == _2d_array[0][idx_2d_arr] )
             {
-                //term: same, merge                
-                for(int j=0; j < row; j++)
-                {
-                    tmp_vec[0][idx_tmp] = _2d_array[0][idx_2d_arr];
-                }                
-                merge();
+                //term: same, merge                            
+                tmp_vec[row][idx_tmp] = merge(tmp_vec, _2d_array, row, idx_tmp, idx_2d_arr);
                 // increment index value
                 idx_input++; 
                 idx_2d_arr++;

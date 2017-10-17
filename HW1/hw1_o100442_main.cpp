@@ -80,8 +80,9 @@ int main()
     std::cout << "#---Poly---#" << std::endl;
     Poly poly1(vectorD);
     poly1.print_poly();
-
-    
+    std::cout << "#---Add()---#" << std::endl;
+    poly1.add(vectorD);
+    poly1.print_poly();
 
     return 0;
 }
