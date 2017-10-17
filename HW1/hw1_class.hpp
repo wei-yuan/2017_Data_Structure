@@ -61,6 +61,7 @@ public:
     // input list class vector ?
     void add(std::vector< std::vector<int> > & input_2d_array)
     {
+        std::vector< std::vector<int> > tmp_array;
         int input_size = input_2d_array.size();
         int self_size = _2d_array.size();
         int idx_input, idx_self;
@@ -68,13 +69,17 @@ public:
 
         std::vector< std::vector<int> >::iterator row_Iter; //between rows
         std::vector<int> ::iterator col_Iter; //between col in same row
-
+        
         for(int i=0; i < std::max(input_size, self_size); i++)
         {
             if( input_2d_array[0][idx_input] == _2d_array[0][idx_self] )
             {
-                //same, merge
+                //term: same, merge
                 merge(input_2d_array, row, idx_input);
+                for(int j=0; j < row; j++)
+                {
+                    tmp[j][idx_input] = input_2d_array[j][idx_input];
+                }
                 // increment index value
                 idx_input++; idx_self++;
             }                
@@ -88,11 +93,15 @@ public:
             {
                 // term: input array < self
                 // insert into self vector
+                /* TODO: use insert() of vector
                 for(row_Iter = _2d_array.begin(); row_Iter != _2d_array.end(); row++)
                 {
                     //_2d_array.insert(row, );
-                    //input_2d_array.begin() + idx_self, input_2d_array[0][idx_input]
-                }                                     
+                }*/
+                for(int j=0; j < row; j++)
+                {
+                    tmp[j][idx_input] = input_2d_array[j][idx_input];
+                }
                 // increment 
                 idx_input++;
             }
