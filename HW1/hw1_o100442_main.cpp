@@ -33,7 +33,13 @@ int main()
     
     for(size_t row=0; row < vectorD.size(); row++)
         for(size_t col=0; col < vectorD[row].size(); col++)
-                std::cout << "vectorD[" << row << "][" << col << "]: " << vectorD[row][col] <<  std::endl;
+            std::cout << "vectorD[" << row << "][" << col << "]: " << vectorD[row][col] <<  std::endl;
+    for(size_t row=0; row < vectorE.size(); row++)
+        for(size_t col=0; col < vectorE[row].size(); col++)
+            std::cout << "vectorE[" << row << "][" << col << "]: " << vectorE[row][col] <<  std::endl;
+    for(size_t row=0; row < vectorF.size(); row++)
+        for(size_t col=0; col < vectorF[row].size(); col++)
+            std::cout << "vectorF[" << row << "][" << col << "]: " << vectorF[row][col] <<  std::endl;            
     
     
     //mergesort, how about execution time

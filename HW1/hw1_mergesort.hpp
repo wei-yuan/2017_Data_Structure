@@ -50,22 +50,13 @@ void mergesort_bottom_up(std::vector<T> & rand_arr, int num_element)
     // interval size control
     for(int size = 1; size < num_element; size *= 2)
     {      
-        /*GDB*/ 
-        //cout << "size: " << size << endl;             
-        // over vector iteration
         for(int i = 0; i <= num_element - size; i += size*2)
         {
             /*GDB*/ 
             //cout << "i: " << i << endl;            
             if( rand_arr[ i + size - 1 ] > rand_arr[ i + size ] )
                 _merge(rand_arr, i, i+size-1, std::min( i+size*2-1, num_element-1) ); //arr, low, mid, high
-        }
-        
-        /*GDB*/
-        /*for(int k = 0; k < 5; k++)
-        {
-            std::cout << "rand_arr[" << k << "]: " << rand_arr[k] << std::endl;
-        }*/    
+        }  
     }
 }
 

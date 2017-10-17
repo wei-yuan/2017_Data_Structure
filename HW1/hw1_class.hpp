@@ -136,10 +136,12 @@ public:
         // C = A * B, transpose B for convenience
         // It only needs to change the idx of reading input_2d_array 
         // from row to col vector
-        std::vector<int> tmp_vec(1, 0); // init
+        std::vector<std::vector<int>>  tmp_vec_2d = {{0}, {0}, {0}};
 
         int input_size = input_2d_array.size();
-        int _2d_arr_size = _2d_array.size();        
+        int _2d_arr_size = _2d_array.size();
+        int cnt, idx;
+        cnt = idx = 0;
                 
         for(int i=0; i < _2d_arr_size; i++)
         {
@@ -147,22 +149,28 @@ public:
             {
                 // element wise multiplication
                 // transpose here: change 0 -> 1
-                //merge operation
-                if(input_2d_array[1][i] == _2d_array[0][j]) 
+                // merge operation
+                if(input_2d_array[1][j] == _2d_array[0][i]) 
                 {
-                    tmp_vec[0]  = input_2d_array[2][i] * _2d_array[2][j];
-                    // val1 * val2 - > val1 add val2 times
-                    for(int k=0; k< tmp_vec[0]; k++)
-                    {
-                        merge(input_2d_array,_2d_array, 2, i, j);
+                    tmp_vec_2d[0][idx]  = _2d_array[0][i];
+                    tmp_vec_2d[1][idx]  = input_2d_array[0][j];
+                    cnt  = input_2d_array[2][i] - 1;
+                    // val1 * val2 - > val1 add val2 times                    
+                    for(int k=0; k < cnt; k++)
+                    {                           
+                        // merge(std::vector< std::vector<int> > & input_2d_array_1, 
+                        //       std::vector< std::vector<int> > & input_2d_array_2, 
+                        //       int row, int col_1, int col_2)                        
+                        tmp_vec_2d[2][idx] =  merge(_2d_array, input_2d_array, 2, i, j);                        
                     }
+                    idx++;
                 }
-                else
-                {
-                    //zero, do nothing
+                else //result is zero, do nothing
+                {                    
                 }             
-            }
-        }        
+            }            
+        }
+        _2d_array = tmp_vec_2d;
     }
 };
 
