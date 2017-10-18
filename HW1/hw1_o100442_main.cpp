@@ -46,21 +46,30 @@ int main()
 
     // place an array into list class
     std::cout << "#---Class---#" << std::endl;
-
+    // change to OOP style of code    
     std::cout << "#---List---#" << std::endl;
     List list1(vectorC);
-    list1.print_array();    
+    std::cout << list1 << std::endl; //class: std::out version print
+
     std::cout << "#---Poly---#" << std::endl;
-    Poly poly1(vectorD);
-    poly1.print_array();
+    Polygon<List> poly1(vectorD);
+    std::cout << poly << std::endl; //class: std::out version print
+
     std::cout << "#---add()---#" << std::endl;
-    poly1.add(vectorD);
-    poly1.print_array();
+    poly1 = poly1 + vectorD;
+    poly1 += vectorD;
+
+    poly1.insert(vectorD);
+    poly1.push_back(vectorD);
+
+    std::cout << poly << std::endl; //class: std::out version print
+
     std::cout << "#---spmatrix---#" << std::endl;
-    Spmatrix spmatrix1(vectorE);
+
+    SparseMatrix<List> spmatrix1(vectorE);
     std::cout << "#---mul()---#" << std::endl;
     spmatrix1.mul(vectorF);
-    spmatrix1.print_array();
+    std::cout << sparmatrix1 << std::endl; //class: std::out version print
 
     return 0;
 }
