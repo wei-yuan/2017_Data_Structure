@@ -29,18 +29,7 @@ int main()
 
     for(size_t row=0; row < vectorC.size(); row++)
         for(size_t col=0; col < vectorC[row].size(); col++)
-            std::cout << "vectorC[" << row << "][" << col << "]: " << vectorC[row][col] <<  std::endl;
-    
-    for(size_t row=0; row < vectorD.size(); row++)
-        for(size_t col=0; col < vectorD[row].size(); col++)
-            std::cout << "vectorD[" << row << "][" << col << "]: " << vectorD[row][col] <<  std::endl;
-    for(size_t row=0; row < vectorE.size(); row++)
-        for(size_t col=0; col < vectorE[row].size(); col++)
-            std::cout << "vectorE[" << row << "][" << col << "]: " << vectorE[row][col] <<  std::endl;
-    for(size_t row=0; row < vectorF.size(); row++)
-        for(size_t col=0; col < vectorF[row].size(); col++)
-            std::cout << "vectorF[" << row << "][" << col << "]: " << vectorF[row][col] <<  std::endl;            
-    
+            std::cout << "vectorC[" << row << "][" << col << "]: " << vectorC[row][col] <<  std::endl;    
     
     //mergesort, how about execution time
     mergesort_bottom_up(vectorA, size_of_array);
@@ -57,19 +46,19 @@ int main()
 
     // place an array into list class
     std::cout << "#---Class---#" << std::endl;
-   
+
     std::cout << "#---List---#" << std::endl;
     List list1(vectorC);
-    list1.print_array();
-    
+    list1.print_array();    
     std::cout << "#---Poly---#" << std::endl;
     Poly poly1(vectorD);
     poly1.print_array();
-    std::cout << "#---Add()---#" << std::endl;
+    std::cout << "#---add()---#" << std::endl;
     poly1.add(vectorD);
     poly1.print_array();
     std::cout << "#---spmatrix---#" << std::endl;
     Spmatrix spmatrix1(vectorE);
+    std::cout << "#---mul()---#" << std::endl;
     spmatrix1.mul(vectorF);
     spmatrix1.print_array();
 
