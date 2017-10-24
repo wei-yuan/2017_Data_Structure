@@ -4,10 +4,10 @@
 # include <iostream>
 
 // struct version
-struct s_node
+struct Node
 {
     int data;
-    s_node* s_next; // struct pointer
+    Node* next; // struct pointer
 };
 
 // class version
@@ -15,7 +15,7 @@ class c_node
 {
 protected:
     int data;
-    c_node* c_next;
+    c_node* next;
 };
 
 # endif

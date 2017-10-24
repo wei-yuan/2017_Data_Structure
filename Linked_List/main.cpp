@@ -1,71 +1,76 @@
-#include <iostream>
 #include "Linked_Lisrt.hpp"
+#include <iostream>
 
 using namespace std;
 
+// TODO: template version?
+
 // only for the 1st Node
-void initSNode(struct s_node *head, int n)
+void initNode(struct Node *head, int intput_data) {
+    // New a head of list
+    Node init_Node;
+    head = &init_Node;
+    // Assignment
+    head->data = intput_data;
+    head->next = NULL;
+    cout << "Struct node data= " << head->data << ", Next struct node= " << head->next << endl;
+}
+
+// appending
+void appendNode(struct Node *head, int n) 
 {
-    head->data  = n;
-    head->s_next = NULL;
+    // iterate to last node
+    while(head->next != NULL);
+    
 }
 
-/*void initCNode(class c_node *head, int n){
-    head->data = n;
-    head->c_ptr = NULL;
-}
-
-// apending
-void addNode(struct s_node *head, int n)
+void insertFront(struct Node *head, int inset_num) 
 {
-
+    // create new front Node
+    struct Node* new_front_Node_ptr; 
+    new_front_Node_ptr->data = inset_num;
+    new_front_Node_ptr->next = head;
+    // head pointer point to new front Node
+    head = new_front_Node_ptr; 
 }
-
-void insertFront()
-{
-}
-
-struct Node searchNode(struct Node *head, int n)
+/*
+struct Node* searchNode(struct Node *head, int n)
 {
 
 }
 
 bool deleteNode()
 {
-}*/
-
-void display(struct s_node *head)
-{
-    while(head != NULL)
-    {
-        int i = 0;
-        cout << "Struct node" << i << "= " << head->data << endl;
-        head = head->s_next;
-        i++;        
+}
+*/
+void display(struct Node *head) {    
+    int i = 0;
+    
+    if(head != NULL){
+        while (1) {        
+            cout << "Struct node[" << i << "]= " << head->data << endl;
+            if (head->next != NULL)
+                head = head->next;
+            else
+                break;
+            i++;        
+        }
     }
+    else
+    {
+        cout << "Struct node[" << i << "]= " << head->data << endl;     
+    }    
 }
 
-int main()
-{
+int main() {
+    // pointer to struct
+    struct Node* head;
+    struct Node* tail;
     // create 3 node
-    s_node snode1;
-    s_node snode2;
-    s_node snode3;
+    initNode(head, 1);
+    cout << "Struct node data= " << head->data << ", Next struct node= " << head->next << endl;    
 
-    struct s_node *head;
-    struct s_node *tail;
-
-    snode1.data = 1;
-    snode1.data = 2;
-    snode1.data = 3;
-    
-    // linked
-    head = &snode1;
-    tail = &snode3;
-    snode1.s_next = &snode2;
-    snode2.s_next = &snode3;
-    snode2.s_next = NULL;
-
+    // show list
     display(head);
 
     return 0;
