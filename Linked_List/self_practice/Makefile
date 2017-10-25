@@ -6,7 +6,7 @@ DEPS=$(addprefix objs/, $(patsubst %.cpp,%.d,$(SRCS)))
 
 CXX=g++
 
-CFLAGS=-g -Wall #`pkg-config --cflags opencv` 
+CFLAGS=-g -Wall -std=c++11 #`pkg-config --cflags opencv` 
 #LIBS = `pkg-config --libs opencv`
 
 #PREFIX=/usr/local/cuda/targets/x86_64-linux
@@ -14,7 +14,7 @@ CFLAGS=-g -Wall #`pkg-config --cflags opencv`
 
 LOCAL_CFLAGS=-Wno-deprecated-declarations
 
-TARGET=linkedlist
+TARGET=main
 
 .PHONY: all clean execute directories
 

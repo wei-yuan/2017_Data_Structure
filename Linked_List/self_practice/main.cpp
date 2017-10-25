@@ -6,10 +6,11 @@ using namespace std;
 // TODO: template version?
 
 // only for the 1st Node
-struct Node *initNode(struct Node *head, int intput_data) {    
+Node *initNode(Node *head, int intput_data) {    
     // New a head of list
-    Node init_Node;
-    head = &init_Node;
+    // dynamic allocation in C
+    struct Node *init_Node_ptr = (struct Node*) malloc(sizeof(struct Node));
+    init_Node_ptr = head;
     // Assignment
     head->data = intput_data;
     head->next = NULL;
@@ -17,25 +18,24 @@ struct Node *initNode(struct Node *head, int intput_data) {
     return head;
 }
 
-void display(struct Node *head) {        
+void display(Node *head) {        
+    cout << "--- Print List Start---" << endl;
+    
+    int i = 0;    
+    Node* it_ptr = head;
+
     if(head == NULL)
     {
         cout << "Empty List" << endl;
         return;
     } 
-
-    int i = 0;
-    struct Node it;
-    struct Node* it_ptr = &it;
     
-    it_ptr->data = head->data;
-    it_ptr->next = head->next;
-
     while (it_ptr != NULL) {              
         cout << "Struct node[" << i << "]= " << it_ptr->data << endl;                      
         it_ptr = it_ptr->next;
         i++;        
-    }    
+    }
+    cout << "--- Print List End---" << endl;
 }
 
 // appending
@@ -46,7 +46,7 @@ void appendNode(struct Node *head, int n)
     
 }
 
-struct Node *insertFront(struct Node *head, int insert_num) 
+Node *insertFront(struct Node *head, int insert_num) 
 {    
     // create new front Node    
     struct Node new_front_Node;
@@ -84,25 +84,37 @@ struct Node* searchNode(struct Node *head, int n)
 bool deleteNode()
 {
 }
-
-deleteList(struct Node **head)
-{
-
-}
 */
+void deleteList(struct Node *head)
+{    
+    while (head != NULL) {                      
+        cout << "Delete Struct node= " << head->data << endl;
+        // record memory position of next node
+        struct Node *current_ptr = (struct Node*) malloc(sizeof(struct Node));
+        current_ptr = head;
+        head = head->next;
+        // delete dynamically allocated Node
+        free(current_ptr);        
+    }
+}
+
 
 int main() {
     // pointer to struct
-    struct Node *head;
-    struct Node *tail;
-    // create 3 node    
+    Node *head = NULL;
+    Node *tail = NULL;
+    // create 3 node
+    display(head); 
     head = initNode(head, 1);
-    display(head);
-    head = insertFront(head, 0);
     cout << "Struct node data= " << head->data << ", Next struct node= " << head->next << endl;
+    display(head);
+        
+    //head = insertFront(head, 0);    
 
     // show list
     //display(head);
+    // Don't forget free()
+    deleteList(head);
 
     return 0;
 }
