@@ -1,101 +1,106 @@
 #include<iostream>
+#include "memory.h"
 
-using namespace std;
-
-template<typename T>
-struct Node {
-	T data;
-	struct Node<T> *leftChild;
-	struct Node<T> *rightChild;
+struct Node 
+{
+	int data;
+	struct Node *left;
+	struct Node *right;
 };
 
-//Function to visit nodes in Preorder
-template<typename T>
-void Preorder(Node<T> *root) {
-	// base condition for recursion
-	// if tree/sub-tree is empty, return and exit
+//Preorder traversal
+void Preorder( Node *root) 
+{
 	if(root == NULL) return;
 
-	cout << root->data << endl; 	// Print data
-	Preorder(root->leftChild);       // Visit left subtree
-	Preorder(root->rightChild);      // Visit right subtree
+	std::cout << root->data << std::endl; 
+	Preorder(root->left);     // go to left subtree
+	Preorder(root->right);    // got to right subtree
 }
 
-//Function to visit nodes in Inorder
-template<typename T>
-void Inorder(Node<T> *root) {	
+//Inorder traversal
+void Inorder(Node *root) 
+{
 	if(root == NULL) return;
 
-	Inorder(root->leftChild);        //Visit left subtree
-	cout << root->data << endl; //Print data
-	Inorder(root->rightChild);       // Visit right subtree
+	Inorder(root->left);       //got to left subtree
+	std::cout << root->data << std::endl; 
+	Inorder(root->right);      // got to right subtree
 }
 
-//Function to visit nodes in Postorder
-template<typename T>
-void Postorder(Node<T> *root) {
+void find_num_Inorder(Node *root, int k) {
+	if(root == NULL) return;
+		
+	//if k > num in tree, keep update
+	if(k < root->data)
+	{	
+		std::cout << "number L: " << root->data << std::endl; 
+		memcpy(&k, &root->data, sizeof(int));
+		return;
+	}
+
+	find_num_Inorder(root->left, k);       //got to left subtree	
+	std::cout << root->data << std::endl; 
+	find_num_Inorder(root->right, k);      // got to right subtree
+}
+
+//Postorder traversal
+void Postorder(Node *root) {
 	if(root == NULL) return;
 
-	Postorder(root->leftChild);      // Visit left subtree
-	Postorder(root->rightChild);     // Visit right subtree
-	cout << root->data << endl; // Print data
+	Postorder(root->left);    // got to left subtree
+	Postorder(root->right);   // got to right subtree
+	std::cout << root->data << std::endl; 
 }
 
 // Function to Insert Node in a Binary Search Tree
-template<typename T>
-Insert(Node<T>* root, T data) {	
+Node* Insert(Node *root, int data) {
 	if(root == NULL) {
-	//if(!root->valid) {	
-		//cout << "root: " << root << endl;	
-		root = new Node<T>();
-		cout << "root: " << root << endl;
-		root->data = data;		
-		root->leftChild = root->rightChild = NULL;				
-		//cout << "root == NULL" << endl;
-		cout << "Insert:" << root->data << endl;
+		root = new Node();
+		root->data = data;
+		root->left = root->right = NULL;
 		return root;
 	}
 	else if(data <= root->data)
-	{				
-		cout << "data <= root->data" << endl;
-		Insert(root->leftChild, data);
-	}		
-	else
-	{		
-		cout << "data > root->data" << endl;
-		Insert(root->rightChild, data);
-	}		
+		root->left = Insert(root->left,data);
+	else 
+		root->right = Insert(root->right,data);
 	return root;
 }
  
 int main() {
+	Node* root = NULL;
 	
-	Node<int>* root = NULL;
+	/* 3-5 traversal method */
+	// insert data
+	root = Insert(root, 5); 
+	root = Insert(root, 1);
+	root = Insert(root, 6); 
+	root = Insert(root, 8); 
+	root = Insert(root, 2); 
+	root = Insert(root, 3);
 
-	// Add node manually
-	Insert(root, 5);
-	cout << "root: " << root << endl;	 
-	Insert(root, 1);
-	cout << "root: " << root << endl;	
-	Insert(root, 6); 
-	cout << "root: " << root << endl;	
-	Insert(root, 8);
-	cout << "root: " << root << endl;	
-	Insert(root, 2); 
-	cout << "root: " << root << endl;	
-	Insert(root, 3);
-	cout << "root: " << root << endl;	
-
-	//Print Nodes in Preorder
-	cout<<"Preorder: ";
+	//Print Nodes in Preorder. 
+	std::cout<<"Preorder: \n";
 	Preorder(root);
-	cout<<"\n";
+	std::cout << std::endl;
 	//Print Nodes in Inorder
-	cout<<"Inorder: ";
+	std::cout<<"Inorder: \n";
 	Inorder(root);
-	cout<<"\n";
+	std::cout << std::endl;
 	//Print Nodes in Postorder
-	cout<<"Postorder: ";
+	std::cout<<"Postorder: \n";
 	Postorder(root);
-	cout<<"\n";
+	std::cout << std::endl;
+
+	/* 3-6 find the least number L that exceeds a predefined number k */
+	int k = 7;	
+	std::cout<<"find the least number L that exceeds a predefined number k: \n";
+	find_num_Inorder(root, k);	
+
+	/* 3-7  find the least summation S of two numbers *m and *n in a binary search tree 
+	where their summation exceeds a predefined number k */	
+	int l = 5;
+
+	return 0;
 }
