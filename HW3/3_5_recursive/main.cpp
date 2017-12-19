@@ -28,24 +28,43 @@ void Inorder(Node *root)
 	Inorder(root->right);      // got to right subtree
 }
 
-void find_num_Inorder(Node *root, int k) {
+void Least_Bound(Node *root, int k) 
+{
 	if(root == NULL) return;
 		
 	//if k > num in tree, keep update
 	if(k < root->data)
 	{	
-		std::cout << "number L: " << root->data << std::endl; 
-		memcpy(&k, &root->data, sizeof(int));
+		std::cout << "number L: " << root->data << std::endl; 				
 		return;
 	}
 
-	find_num_Inorder(root->left, k);       //got to left subtree	
+	Least_Bound(root->left, k);       //got to left subtree	
 	std::cout << root->data << std::endl; 
-	find_num_Inorder(root->right, k);      // got to right subtree
+	Least_Bound(root->right, k);      // got to right subtree	
+}
+
+
+// use a global int array to store value in BST
+int arr[10] = {};
+int Least_Combined(Node *root, int* arr) 
+{	
+	if(root == NULL) return 0;
+
+	int index = 0;				
+	// LHS
+	index += Least_Combined(root->left, arr);       //got to left subtree
+	// storing data here
+	arr[index++] = root->data;
+	// RHS
+	index += Least_Combined(root->right, arr + index);      // got to right subtree
+	
+	return index;
 }
 
 //Postorder traversal
-void Postorder(Node *root) {
+void Postorder(Node *root) 
+{
 	if(root == NULL) return;
 
 	Postorder(root->left);    // got to left subtree
@@ -96,11 +115,37 @@ int main() {
 	/* 3-6 find the least number L that exceeds a predefined number k */
 	int k = 7;	
 	std::cout<<"find the least number L that exceeds a predefined number k: \n";
-	find_num_Inorder(root, k);	
+	Least_Bound(root, k);		
+	std::cout << std::endl;
 
 	/* 3-7  find the least summation S of two numbers *m and *n in a binary search tree 
 	where their summation exceeds a predefined number k */	
-	int l = 5;
+	std::cout<<"find the least summation S of two numbers *m and *n: \n";	
+	
+	int sum = 6;		
+	std::cout<<"test sum: " << sum << std::endl;
+	int index = 0;	
+
+	// assign arr with -1 to check validility
+	for(int i=0; i < 10; i++)
+		arr[i] = -1;
+
+	Least_Combined(root, arr); // 0 cuz root node has no parent
+	bool find = false;
+	for(int i=0; i < 10; i++) // 0~9
+	{		
+		for(int j=1+i; j <10; j++) 
+		{
+ 			if(sum < arr[i] + arr[j])
+			{
+				std::cout << "m:" << arr[i] << ", n:" << arr[j]<< ", m+n:" << arr[i]+arr[j] << std::endl; 
+				find = true;
+				break;
+			}
+		}
+
+		if(find == true) break;
+	}	
 
 	return 0;
 }
