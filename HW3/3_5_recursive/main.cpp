@@ -3,8 +3,8 @@
 struct Node 
 {
 	int data;
-	struct Node *left;
-	struct Node *right;
+	struct Node *leftChild;
+	struct Node *rightChild;
 };
 
 //Preorder traversal
@@ -13,8 +13,8 @@ void Preorder( Node *root)
 	if(root == NULL) return;
 
 	std::cout << root->data << std::endl; 
-	Preorder(root->left);     // go to left subtree
-	Preorder(root->right);    // got to right subtree
+	Preorder(root->leftChild);     // go to left subtree
+	Preorder(root->rightChild);    // got to right subtree
 }
 
 //Inorder traversal
@@ -22,9 +22,9 @@ void Inorder(Node *root)
 {
 	if(root == NULL) return;
 
-	Inorder(root->left);       //got to left subtree
+	Inorder(root->leftChild);       //got to left subtree
 	std::cout << root->data << std::endl; 
-	Inorder(root->right);      // got to right subtree
+	Inorder(root->rightChild);      // got to right subtree
 }
 
 void Least_Bound(Node *root, int k) 
@@ -38,9 +38,9 @@ void Least_Bound(Node *root, int k)
 		return;
 	}
 
-	Least_Bound(root->left, k);       //got to left subtree	
+	Least_Bound(root->leftChild, k);       //got to left subtree	
 	std::cout << root->data << std::endl; 
-	Least_Bound(root->right, k);      // got to right subtree	
+	Least_Bound(root->rightChild, k);      // got to right subtree	
 }
 
 
@@ -51,12 +51,12 @@ int Least_Combined(Node *root, int* arr)
 	if(root == NULL) return 0;
 
 	int index = 0;				
-	// LHS
-	index += Least_Combined(root->left, arr);       //got to left subtree
+	// LHS, got to left subtree
+	index += Least_Combined(root->leftChild, arr);       
 	// storing data here
 	arr[index++] = root->data;
-	// RHS
-	index += Least_Combined(root->right, arr + index);      // got to right subtree
+	// RHS, got to right subtree
+	index += Least_Combined(root->rightChild, arr + index);    
 	
 	return index;
 }
@@ -66,8 +66,8 @@ void Postorder(Node *root)
 {
 	if(root == NULL) return;
 
-	Postorder(root->left);    // got to left subtree
-	Postorder(root->right);   // got to right subtree
+	Postorder(root->leftChild);    // got to left subtree
+	Postorder(root->rightChild);   // got to rightChild subtree
 	std::cout << root->data << std::endl; 
 }
 
@@ -76,13 +76,13 @@ Node* Insert(Node *root, int data) {
 	if(root == NULL) {
 		root = new Node();
 		root->data = data;
-		root->left = root->right = NULL;
+		root->leftChild = root->rightChild = NULL;
 		return root;
 	}
 	else if(data <= root->data)
-		root->left = Insert(root->left,data);
+		root->leftChild = Insert(root->leftChild,data);
 	else 
-		root->right = Insert(root->right,data);
+		root->rightChild = Insert(root->rightChild,data);
 	return root;
 }
  
